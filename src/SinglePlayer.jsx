@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const RenderSinglePlayer = ({setUpdateApp, currentID, setCurrentID, API_URL}) => {
+const RenderSinglePlayer = ({setUpdateApp, currentID, setCurrentID, API_URL, getPlayers}) => {
   const [currentPlayer, setCurrentPlayer] = useState(false);
   
   useEffect(() => {
@@ -15,8 +15,8 @@ const RenderSinglePlayer = ({setUpdateApp, currentID, setCurrentID, API_URL}) =>
 
   const handleClick = () => {
     console.log("Retured")
-    setUpdateApp(false)
     setCurrentID(0)
+    getPlayers()
   }
 
   const adoptPuppy = () => {

@@ -16,15 +16,16 @@ function App() {
   const COHORT = "2402-FTB-ET-WEB-FT"
   const API_URL = `https://fsa-puppy-bowl.herokuapp.com/api/${COHORT}/players/`
 
+  const getPlayers = async() => {
+    const response = await fetch(API_URL)
+    const jsonFile = await response.json()
+    const players = jsonFile.data.players
+    setPlayerList(players)
+    setUpdateApp(false)
+    setCurrentID(0)
+  }
+  
   useEffect(() => {
-    const getPlayers = async() => {
-      const response = await fetch(API_URL)
-      const jsonFile = await response.json()
-      const players = jsonFile.data.players
-      setPlayerList(players)
-      setUpdateApp(false)
-      setCurrentID(0)
-    }
     getPlayers()
   }, [])
 
@@ -55,9 +56,11 @@ function App() {
         );
         const result = await response.json();
         console.log(result);
+        await getPlayers()
       } 
       catch (err) {
         console.error(err);
+        await getPlayers()
       }
     }
     postNewPlayer()
@@ -88,7 +91,7 @@ function App() {
       <h1>Players</h1>
       {(updateApp == false) ?
       <RenderAllPlayers playerList={playerList} setUpdateApp={setUpdateApp} setCurrentID={setCurrentID}/>
-      : <RenderSinglePlayer setUpdateApp={setUpdateApp} currentID={currentID} setCurrentID={setCurrentID} API_URL={API_URL}/>}
+      : <RenderSinglePlayer setUpdateApp={setUpdateApp} currentID={currentID} setCurrentID={setCurrentID} API_URL={API_URL} getPlayers={getPlayers}/>}
     </>
   )
 }
