@@ -1,0 +1,19 @@
+body {
+  background-color: midnightblue;
+  color: goldenrod;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+}
+
+section {
+  background-color: black;
+}
+
+#form {
+  background-color: black;
+  margin-bottom: 10px;
+  padding: 15px;
+}
